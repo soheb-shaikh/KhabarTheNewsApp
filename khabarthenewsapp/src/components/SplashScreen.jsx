@@ -1,4 +1,4 @@
-// SplashScreen.js
+// components/SplashScreen.js
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -7,16 +7,15 @@ const SplashScreen = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      history.push('/main'); // Navigate to the main screen after a delay
-    }, 3000); // 3000 milliseconds (2 seconds)
+      history.push('/main');
+    }, 2000);
 
-    return () => clearTimeout(timer); // Clear the timer if the component unmounts
+    return () => clearTimeout(timer);
   }, [history]);
 
   return (
     <div>
       <h1>Khabar The News App</h1>
-      { }
     </div>
   );
 };

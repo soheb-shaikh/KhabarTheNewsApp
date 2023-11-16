@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import TopStories from './components/TopStories';
+import AllStories from './components/AllStories';
+import SplashScreen from './components/SplashScreen';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentTab, setCurrentTab] = useState('top-stories');
+
+  const handleTabChange = (tab) => {
+    setCurrentTab(tab);
+  };
+
+  useEffect(() => {
+    // Simulate an asynchronous operation (e.g., fetching data) that takes time
+    const fetchData = async () => {
+      // For the sake of the example, we'll use a setTimeout to simulate loading time
+      setTimeout(() => {
+        setIsLoading(false); // Set isLoading to false when data is loaded
+      }, 2000);
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <>
+    <Router>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+        {isLoading ? (
+          <SplashScreen />
+        ) : (
+          <>
+            <header>
+              <h1>Khabar - The News App</h1>
+              <nav>
+                <ul>
+                  <li>
+                    <Navigate to="/top-stories" replace state={{ from: '/' }} />
+                  </li>
+                  <li>
+                    <Navigate to="/all-stories" replace state={{ from: '/' }} />
+                  </li>
+                </ul>
+              </nav>
+            </header>
 
-export default App
+            <main>
+              <Routes>
+                <Route path="/top-stories" element={<TopStories />} />
+                <Route path="/all-stories" element={<AllStories />} />
+              </Routes>
+            </main>
+          </>
+        )}
+      </div>
+    </Router>
+  );
+};
+
+export default App;
