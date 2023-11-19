@@ -1,12 +1,16 @@
 // src/components/AllStories.js
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-const AllStories = ({ stories }) => {
+const AllStories = () => {
+
+  const allStories = useSelector((state) => state.news.allStories);
+
   return (
     <div>
       <h2>All Stories</h2>
       <ul>
-        {stories.map((story) => (
+        {allStories.map((story) => (
           <li key={story.uuid}>
             <div>
               <h3>{story.title}</h3>

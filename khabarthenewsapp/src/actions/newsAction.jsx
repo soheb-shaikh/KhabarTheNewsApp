@@ -5,7 +5,7 @@ export const FETCH_TOP_STORIES = 'FETCH_TOP_STORIES';
 export const FETCH_ALL_NEWS = 'FETCH_ALL_NEWS';
 export const FETCH_SIMILAR_NEWS = 'FETCH_SIMILAR_NEWS';
 
-const API_KEY = process.env.KHABAR_API_KEY;
+const API_KEY = import.meta.env.KHABAR_API_KEY;
 const NEWS_API_URL = 'https://api.thenewsapi.com/v1';
 
 export const fetchTopStories = () => async (dispatch) => {

@@ -1,11 +1,14 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { fetchTopStories, fetchAllNews } from './actions/newsAction.jsx';
 import TopStories from './components/TopStories';
 import AllStories from './components/AllStories';
 import SplashScreen from './components/SplashScreen';
 
 const App = () => {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const [currentTab, setCurrentTab] = useState('top-stories');
 
@@ -14,16 +17,21 @@ const App = () => {
   };
 
   useEffect(() => {
-    // Simulate an asynchronous operation (e.g., fetching data) that takes time
     const fetchData = async () => {
-      // For the sake of the example, we'll use a setTimeout to simulate loading time
-      setTimeout(() => {
-        setIsLoading(false); // Set isLoading to false when data is loaded
-      }, 2000);
+      try {
+        // Dispatch actions to fetch data
+        await dispatch(fetchTopStories());
+        await dispatch(fetchAllNews());
+        // Set isLoading to false when data is loaded
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // Handle errors or set a flag to indicate an error occurred
+      }
     };
 
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <Router>

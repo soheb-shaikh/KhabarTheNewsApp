@@ -1,17 +1,17 @@
 // components/SplashScreen.js
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SplashScreen = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      history.push('/main');
+      navigate.push('/main');
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, [history]);
+  }, [navigate]);
 
   return (
     <div>

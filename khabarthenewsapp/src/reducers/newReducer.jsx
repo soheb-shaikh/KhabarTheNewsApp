@@ -1,5 +1,5 @@
 // reducers/newsReducer.js
-import { FETCH_TOP_STORIES, FETCH_ALL_NEWS, FETCH_SIMILAR_NEWS } from '../actions/newsActions';
+import { FETCH_TOP_STORIES, FETCH_ALL_NEWS, FETCH_SIMILAR_NEWS } from '../actions/newsAction.jsx';
 
 const initialState = {
   topStories: [],

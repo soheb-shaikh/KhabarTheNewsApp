@@ -1,12 +1,16 @@
 // components/TopStories.js
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-const TopStories = ({ stories }) => {
+const TopStories = () => {
+
+  const topStories = useSelector((state) => state.news.topStories);
+
   return (
     <div>
       <h2>Top Stories</h2>
       <ul>
-        {stories.map((story) => (
+        {topStories.map((story) => (
           <li key={story.uuid}>
             <div>
               <h3>{story.title}</h3>
