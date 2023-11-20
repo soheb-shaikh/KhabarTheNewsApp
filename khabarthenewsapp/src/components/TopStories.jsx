@@ -1,14 +1,28 @@
 // components/TopStories.js
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Tab, Tabs } from 'react-bootstrap';
+import AllStories from './AllStories';
 
 const TopStories = () => {
 
-  const topStories = useSelector((state) => state.news.topStories);
+  const topStories = useSelector((state) => state.topStories);
+  const navigate = useNavigate();
 
   return (
     <div>
       <h2>Top Stories</h2>
+      <div>
+    <Tabs defaultActiveKey="top-stories" id="main-tabs" onSelect={(key) => navigate(`/${key}`)}>
+      <Tab eventKey="top-stories" title="Top Stories">
+        <TopStories />
+      </Tab>
+      <Tab eventKey="all-news" title="All News">
+        <AllStories />
+      </Tab>
+      </Tabs>
+  </div>
       <ul>
         {topStories.map((story) => (
           <li key={story.uuid}>

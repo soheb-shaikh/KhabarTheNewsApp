@@ -1,41 +1,34 @@
 // components/MainComponent.js
-import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTopStories, fetchAllNews, fetchSimilarNews } from '../actions/newsActions';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Tab, Tabs } from 'react-bootstrap';
+import { fetchTopStories, fetchAllNews } from '../actions/newsAction.jsx';
 import TopStories from './TopStories';
-import AllNews from './AllNews';
-import SimilarNews from './SimilarNews';
+import AllStories from './AllStories';
+import { useNavigate } from 'react-router-dom';
 
 const MainComponent = () => {
-  const dispatch = useDispatch();
 
-  const topStories = useSelector((state) => state.topStories);
-  const allNews = useSelector((state) => state.allNews);
-  const similarNews = useSelector((state) => state.similarNews);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch top stories and all stories when the component mounts
+    dispatch(fetchTopStories());
+    dispatch(fetchAllNews());
+  }, [dispatch]);
 
   return (
-    <div>
-      <nav>
-        <ul>
-          <li><Link to="/main/top-stories">Top Stories</Link></li>
-          <li><Link to="/main/all-news">All News</Link></li>
-          <li><Link to="/main/similar-news">Similar News</Link></li>
-        </ul>
-      </nav>
-
-      <Switch>
-        <Route path="/main/top-stories">
-          <TopStories data={topStories} />
-        </Route>
-        <Route path="/main/all-news">
-          <AllNews data={allNews} />
-        </Route>
-        <Route path="/main/similar-news">
-          <SimilarNews data={similarNews} />
-        </Route>
-      </Switch>
-    </div>
+  <div>
+    <Tabs defaultActiveKey="top-stories" id="main-tabs" onSelect={(key) => navigate(`/${key}`)}>
+      <Tab eventKey="top-stories" title="Top Stories">
+        <TopStories />
+      </Tab>
+      <Tab eventKey="all-news" title="All News">
+        <AllStories />
+      </Tab>
+      </Tabs>
+  </div>
   );
 };
 
