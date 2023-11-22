@@ -6,11 +6,23 @@ import { fetchTopStories, fetchAllNews } from '../actions/newsAction.jsx';
 import TopStories from './TopStories';
 import AllStories from './AllStories';
 import { useNavigate } from 'react-router-dom';
+import { useUserAuthentication } from '../authentication/UsersAuthenticationContext.jsx';
 
 const MainComponent = () => {
+  const { signOut, user } = useUserAuth();
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      navigate("/");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
     // Fetch top stories and all stories when the component mounts
