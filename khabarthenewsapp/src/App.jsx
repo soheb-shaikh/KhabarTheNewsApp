@@ -1,51 +1,37 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import SplashScreen from './components/SplashScreen';
 import MainComponent from './components/MainComponent';
 import TopStories from './components/TopStories';
 import AllStories from './components/AllStories';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import { lightTheme, darkTheme } from './assets/Themes';
+import RouteProtection from './components/RouteProtection';
 
 const App = () => {
-  const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Set isLoading to false when data is loaded
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        // Handle errors or set a flag to indicate an error occurred
-      }
-    };
-
-    fetchData();
-  }, [dispatch]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <CssBaseline />
       <div>
-        {isLoading ? (
-          <SplashScreen />
-        ) : (
-          <>
-            <header>
-              <h1>Khabar - The News App</h1>
-            </header>
-
             <main>
               <Routes>
-                <Route path="/main/*" element={<MainComponent />}/>
-                <Route path="top-stories" element={<TopStories />} />
-                <Route path="all-news" element={<AllStories />} /> 
-                <Route index element={<Navigate to="/main" replace />} />
+                <Route path="/main" element={<RouteProtection><MainComponent /></RouteProtection>}>
+                  <Route path="top-stories" element={<TopStories />}/>
+                  <Route path="all-stories" element={<AllStories />} />
+                </Route>
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route index element={<Navigate to="/signin" replace />} />
+                <Route index element={<SplashScreen />} />
               </Routes>
             </main>
-          </>
-        )}
       </div>
+    </ThemeProvider>
   );
 };
 
