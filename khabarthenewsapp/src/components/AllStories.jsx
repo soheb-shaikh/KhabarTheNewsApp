@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import Header from './Header';
 
 const AllStories = () => {
-  const allStories = useSelector((state) => state.allNews);
+  const allStories = useSelector((state) => state.newsPage.allNews);
 
   return (
     <div>

@@ -14,7 +14,7 @@ import Header from './Header';
 import { useTheme } from '@mui/material/styles';
 
 const TopStories = () => {
-  const topStories = useSelector((state) => state.topStories);
+  const topStories = useSelector((state) => state.newsPage.topStories);
   const theme = useTheme();
 
   return (

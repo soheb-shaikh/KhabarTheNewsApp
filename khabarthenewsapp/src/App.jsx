@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes, Navigate } from 'react-router-dom';
@@ -10,7 +9,7 @@ import { lightTheme, darkTheme } from './assets/Themes';
 import { fetchTopStories, fetchAllNews } from './actions/newsAction';
 
 const App = () => {
-  const isDarkMode = useSelector((state) => state.isDarkMode);
+  const isDarkMode = useSelector((state) => state.themeState);
   const dispatch = useDispatch();
 
   useEffect(() => {

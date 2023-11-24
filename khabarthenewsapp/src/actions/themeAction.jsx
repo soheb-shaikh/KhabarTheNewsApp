@@ -1,8 +1,7 @@
-export const DARK_MODE = 'DARK_MODE';
-export const LIGHT_MODE = 'LIGHT_MODE';
+export const TOGGLE_DARK_MODE = 'TOGGLE_DARK_MODE';
 
 export const toggleDarkMode = () => {
   return {
-    type: DARK_MODE,
+    type: TOGGLE_DARK_MODE,
   };
-};
+}

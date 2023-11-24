@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import themeReducer from './themeReducer';
-import newsReducer from './newReducer';
+import newsReducer from './newsReducer';
 
 const khabarAppReducer = combineReducers({
     themeState: themeReducer,

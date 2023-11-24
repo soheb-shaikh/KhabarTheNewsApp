@@ -1,4 +1,3 @@
-// components/Header.jsx
 import React from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Switch, Button, Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +7,7 @@ import { toggleDarkMode } from '../actions/themeAction';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const isDarkMode = useSelector((state) => state.darkMode);
+  const isDarkMode = useSelector((state) => state.themeState);
 
   const handleDarkModeToggle = () => {
     dispatch(toggleDarkMode());
