@@ -1,48 +1,56 @@
-// src/components/AllStories.js
+// components/AllStories.js
+import React from 'react';
+import { Container, Grid, Card, CardContent, Typography, Button } from '@mui/material';
 import { useSelector } from 'react-redux';
-import React, { useEffect } from 'react';
-import { Container, Row, Col, Card, Tab, Tabs } from 'react-bootstrap';
-import TopStories from './TopStories';
+import Header from './Header';
 
 const AllStories = () => {
-  const allStories = useSelector((state) => state.allStories);
+  const allStories = useSelector((state) => state.allNews);
 
   return (
-    <Container>
-      <h2 className="mt-4">All Stories</h2>
-      <Tabs defaultActiveKey="all-news" id="all-stories-tabs" className="mt-3">
-        <Tab eventKey="all-news" title="All News">
-          <Row className="mt-3">
-            {allStories?.map((story) => (
-              <Col key={story.uuid} xs={12} md={6} lg={4} className="mb-4">
-                <Card>
-                  {story.image_url && <Card.Img variant="top" src={story.image_url} alt={story.title} />}
-                  <Card.Body>
-                    <Card.Title>{story.title}</Card.Title>
-                    <Card.Text>{story.description}</Card.Text>
-                    <Card.Text>
-                      <small className="text-muted">
-                      Published at: {new Date(story.published_at).toLocaleString()}
-                      </small>
-                    </Card.Text>
-                    <a
-                      href={story.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary">
-                      Read More
-                    </a>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </Tab>
-        <Tab eventKey="top-stories" title="Top Stories">
-          <TopStories />
-        </Tab>
-      </Tabs>
-    </Container>
+    <div>
+      <Header />
+      <Container>
+        <Typography variant="h4" component="h2" className="mt-4">
+          All Stories
+        </Typography>
+        <Grid container spacing={3} className="mt-3">
+          {allStories?.map((story) => (
+            <Grid key={story.uuid} item xs={12} md={6} lg={4}>
+              <Card>
+                {story.image_url && (
+                  <img src={story.image_url} alt={story.title} style={{ maxWidth: '100%' }} />
+                )}
+                <CardContent>
+                  <Typography variant="h6" component="div">
+                    {story.title}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="div">
+                    {story.description}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="div">
+                    Source: {story.source}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="div">
+                    Published at: {new Date(story.published_at).toLocaleString()}
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    href={story.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    fullWidth
+                  >
+                    Read More
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </div>
   );
 };
 

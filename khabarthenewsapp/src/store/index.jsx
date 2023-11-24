@@ -2,8 +2,8 @@
 import applyMiddleware from 'redux';
 import configureStore from '@reduxjs/toolkit'
 import thunk from 'redux-thunk';
-import newsReducer from '../reducers/newsReducer';
+import khabarAppReducer from '../reducers/khabarAppReducer';
 
-const store = configureStore(newsReducer, applyMiddleware(thunk));
+const store = configureStore(khabarAppReducer, applyMiddleware(thunk));
 
 export default store;
