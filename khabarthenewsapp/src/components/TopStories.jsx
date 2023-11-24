@@ -44,6 +44,9 @@ const TopStories = () => {
                     {story.description}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="div">
+                    Source: {story.source}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="div">
                     Published at: {new Date(story.published_at).toLocaleString()}
                   </Typography>
                   <Button
