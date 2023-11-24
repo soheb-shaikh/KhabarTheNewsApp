@@ -40,6 +40,9 @@ const Header = () => {
               onChange={handleDarkModeToggle}
               inputProps={{ 'aria-label': 'toggle dark mode' }}
             />
+            <Typography variant="body2" sx={{ marginLeft: '8px' }}>
+              {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            </Typography>
           </div>
         </Toolbar>
       </Container>
