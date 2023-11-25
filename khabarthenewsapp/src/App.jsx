@@ -13,7 +13,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Dispatch actions to fetch top stories and all news when the component mounts
     dispatch(fetchTopStories());
     dispatch(fetchAllNews());
   }, [dispatch])

@@ -1,4 +1,3 @@
-// actions/newsActions.js
 import axios from 'axios';
 
 export const FETCH_TOP_STORIES = 'FETCH_TOP_STORIES';
